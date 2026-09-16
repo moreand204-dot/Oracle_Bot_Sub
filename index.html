@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#05060a">
+<title>ORACLE BOT | Pair Center</title>
+<style>
+:root{
+  --bg:#030407;--card:#0a0c11;--card2:#0e1118;--line:#242936;
+  --text:#f4f6fb;--muted:#89909f;--accent:#d8b46a;--accent2:#806b42;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:
+radial-gradient(circle at 50% -10%,rgba(216,180,106,.12),transparent 35%),
+radial-gradient(circle at 100% 70%,rgba(72,77,105,.10),transparent 30%),var(--bg);
+color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body{padding:22px 14px 34px}
+.wrap{width:min(620px,100%);margin:auto}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.brandmini{font-size:11px;letter-spacing:2px;color:#747b89}
+.status{font-size:10px;border:1px solid #282d38;border-radius:999px;padding:7px 10px;color:#bfc5d0;background:#080a0f}
+.card{border:1px solid var(--line);border-radius:26px;background:linear-gradient(180deg,rgba(13,16,23,.96),rgba(7,9,13,.97));box-shadow:0 25px 80px rgba(0,0,0,.48);padding:28px 20px}
+.logo{width:96px;height:96px;border-radius:50%;margin:2px auto 20px;display:grid;place-items:center;
+background:#020307;border:1px solid #353a47;box-shadow:0 0 0 8px rgba(255,255,255,.018),0 0 55px rgba(216,180,106,.10)}
+.logo svg{width:48px;height:48px}
+h1{text-align:center;margin:0;font-size:30px;letter-spacing:.5px;font-weight:850}
+.sub{text-align:center;color:#8d95a4;margin:8px 0 20px;font-size:14px}
+.maker{text-align:center;color:#737a88;font-size:11px;line-height:1.8;margin-bottom:20px}
+.maker strong{color:#c7cbd3;font-weight:750}
+.links{display:flex;justify-content:center;gap:10px;margin-bottom:22px}
+.link{width:45px;height:45px;border:1px solid #292e38;border-radius:14px;background:#090b10;display:grid;place-items:center;color:#d8dce4;text-decoration:none;transition:.2s}
+.link:hover{border-color:#555d6c;transform:translateY(-2px)}
+.link svg{width:20px;height:20px;fill:currentColor}
+.tabs{display:grid;grid-template-columns:1fr 1fr;padding:4px;border:1px solid #2a2f39;background:#080a0e;border-radius:16px;margin-bottom:20px}
+.tab{border:0;border-radius:12px;padding:13px 8px;background:transparent;color:#9aa1ae;font-size:14px;font-weight:800;cursor:pointer}
+.tab.active{background:#f0f1f4;color:#08090c}
+.section{display:none}.section.active{display:block}
+.label{display:block;margin:0 0 9px 2px;font-size:12px;color:#b6bbc5;font-weight:700}
+.input{width:100%;height:56px;border:1px solid #2a2f38;border-radius:15px;background:#07090d;color:#fff;padding:0 16px;font-size:16px;outline:none;direction:ltr;text-align:left;transition:.2s}
+.input:focus{border-color:#777f8f;box-shadow:0 0 0 3px rgba(255,255,255,.035)}
+.primary{width:100%;height:56px;margin-top:13px;border:1px solid #dedfe3;border-radius:15px;background:#f1f2f5;color:#050609;font-size:15px;font-weight:900;cursor:pointer}
+.primary:active{transform:scale(.99)}
+.result{margin-top:14px;min-height:68px;border:1px dashed #343a46;border-radius:15px;background:#080a0e;display:grid;place-items:center;padding:12px;text-align:center;color:#858d9b;font-size:13px}
+.result.code{font-size:25px;letter-spacing:5px;font-weight:900;color:#fff;direction:ltr}
+.copy{width:100%;height:52px;margin-top:10px;border:1px solid #303641;border-radius:14px;background:#0b0e14;color:#e8ebf1;font-weight:800;cursor:pointer}
+.qrbox{width:210px;height:210px;margin:4px auto 12px;border:1px solid #303641;border-radius:18px;background:#fff;display:grid;place-items:center;overflow:hidden}
+.qrbox img{width:100%;height:100%;object-fit:contain;display:none}
+.qrplaceholder{color:#15171b;font-weight:900;font-size:12px}
+.note{margin-top:17px;color:#676f7d;font-size:10px;text-align:center;line-height:1.7}
+.footer{padding:18px 4px 0;text-align:center;color:#555c69;font-size:11px}
+.footer b{color:#858b97}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#eef0f4;color:#050609;border-radius:12px;padding:11px 16px;font-size:12px;font-weight:800;transition:.25s;box-shadow:0 12px 40px #0008}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:420px){body{padding:14px 10px 25px}.card{padding:24px 16px;border-radius:22px}h1{font-size:27px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="brandmini">ORACLE SYSTEM</div>
+    <div class="status">ONLINE / SECURE</div>
+  </div>
+
+  <main class="card">
+    <div class="logo" aria-label="ORACLE">
+      <svg viewBox="0 0 64 64" fill="none">
+        <path d="M32 7c-12.7 0-23 9.2-23 20.5C9 38.7 19.3 48 32 48s23-9.3 23-20.5C55 16.2 44.7 7 32 7Z" stroke="#eee" stroke-width="3"/>
+        <path d="M19 28h26v13H19zM25 22v6M32 18v10M39 22v6" stroke="#eee" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="27" cy="34" r="2" fill="#eee"/><circle cx="37" cy="34" r="2" fill="#eee"/>
+        <path d="M28 39h8" stroke="#eee" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <h1>𝐎𝐑𝐀𝐂𝐋𝐄 𝐁𝐎𝐓</h1>
+    <div class="sub">Link your WhatsApp device</div>
+    <div class="maker">
+      تم صنعه بواسطة <strong>𝐋𝐨𝐫𝐝 𝐄𝐒𝐂𝐀𝐍𝛩𝐑</strong><br>
+      <strong>𝐓𝐇𝐄 𝐋𝐎𝐑𝐃𝐒</strong> · ORACLE DEVELOPMENT TEAM
+    </div>
+
+    <div class="links">
+      <a class="link" href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.9V8.1l6.5 3.9-6.5 3.9Z"/></svg></a>
+      <a class="link" href="#" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M21.7 3.2 2.5 10.6c-1.3.5-1.3 1.2-.2 1.5l4.9 1.5 1.9 5.9c.2.6.1.9.8.9.5 0 .7-.2 1-.5l2.4-2.3 5 3.7c.9.5 1.5.3 1.7-.8l3.1-16c.3-1.4-.5-2-1.4-1.6Z"/></svg></a>
+      <a class="link" href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.1 1.6 5.9L.2 24l6.5-1.7a11.8 11.8 0 0 0 5.4 1.3h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.1-1.2-6.1-3.5-8.3ZM12.2 21.5h-.1a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.7 9.7 0 0 1-1.5-5.1C2.2 6.3 6.6 2 12.1 2c2.6 0 5.1 1 6.9 2.9 1.9 1.8 2.9 4.3 2.9 6.9 0 5.4-4.4 9.7-9.7 9.7Zm5.3-7.3c-.3-.1-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.5-1.5-.9-.8-1.5-1.7-1.7-2-.2-.3 0-.5.1-.7l.5-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.6 1 2.8c.1.2 1.8 2.8 4.4 3.9.6.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3Z"/></svg></a>
+      <a class="link" href="#" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .7a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.3c-3.4.7-4.1-1.4-4.1-1.4-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.6.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.5.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A12 12 0 0 0 12 .7Z"/></svg></a>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="pair">Pair Code</button>
+      <button class="tab" data-tab="qr">QR Code</button>
+    </div>
+
+    <section class="section active" id="pair">
+      <label class="label">Enter your WhatsApp number with country code</label>
+      <input id="phone" class="input" inputmode="tel" autocomplete="tel" placeholder="+201xxxxxxxxx">
+      <button id="generate" class="primary">Generate Pair Code</button>
+      <div id="pairResult" class="result">Your pair code will appear here</div>
+      <button id="copy" class="copy">Copy Code</button>
+      <div class="note">واجهة جاهزة للربط مع API الخاص بالبوت. ضع رابط الـAPI في المتغير الموجود أسفل الملف.</div>
+    </section>
+
+    <section class="section" id="qr">
+      <div class="qrbox">
+        <img id="qrImage" alt="QR Code">
+        <div id="qrPlaceholder" class="qrplaceholder">QR CODE WILL APPEAR HERE</div>
+      </div>
+      <button id="qrGenerate" class="primary">Generate QR Code</button>
+      <div class="note">يمكن ربط زر QR بنفس خدمة البوت عند تجهيز endpoint الخاص بك.</div>
+    </section>
+  </main>
+
+  <div class="footer">© 2026 <b>𝐎𝐑𝐀𝐂𝐋𝐄 𝐁𝐎𝐓</b> · Built by <b>𝐋𝐨𝐫𝐝 𝐄𝐒𝐂𝐀𝐍𝛩𝐑</b> · <b>𝐓𝐇𝐄 𝐋𝐎𝐑𝐃𝐒</b></div>
+</div>
+<div class="toast" id="toast">Copied</div>
+
+<script src="config.js"></script>
+<script>
+// رابط الـ API بييجي من config.js — لو الموقع والـ API شغالين في نفس المكان
+// (زي دلوقتي) هيشتغل برضه حتى لو الرابط فاضي، لأنه هيستخدم نفس الدومين.
+const API_BASE = (window.ORACLE_API_URL || "").replace(/\/+$/, "");
+const $ = s => document.querySelector(s);
+const tabs = document.querySelectorAll(".tab");
+const sections = document.querySelectorAll(".section");
+
+tabs.forEach(tab=>{
+  tab.addEventListener("click",()=>{
+    tabs.forEach(x=>x.classList.remove("active"));
+    sections.forEach(x=>x.classList.remove("active"));
+    tab.classList.add("active");
+    $("#"+tab.dataset.tab).classList.add("active");
+  });
+});
+
+function toast(text){
+  const t=$("#toast"); t.textContent=text; t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),1500);
+}
+
+$("#generate").addEventListener("click", async ()=>{
+  const phone=$("#phone").value.trim().replace(/[^\d+]/g,"");
+  if(!phone){ $("#pairResult").textContent="Enter a valid WhatsApp number"; return; }
+
+  $("#generate").disabled=true;
+  $("#generate").textContent="Generating...";
+  $("#pairResult").className="result";
+  $("#pairResult").textContent="Contacting ORACLE server...";
+
+  try{
+    const r=await fetch(API_BASE+"/pair?number="+encodeURIComponent(phone));
+    const data=await r.json();
+    const code=data.code || data.pairCode || data.pair_code;
+    if(!data.success || !code) throw new Error(data.error || "NO_CODE");
+    $("#pairResult").className="result code";
+    $("#pairResult").textContent=code;
+  }catch(e){
+    $("#pairResult").className="result";
+    $("#pairResult").textContent = e.message || "Unable to generate pair code";
+  }finally{
+    $("#generate").disabled=false;
+    $("#generate").textContent="Generate Pair Code";
+  }
+});
+
+$("#copy").addEventListener("click", async ()=>{
+  const text=$("#pairResult").textContent.trim();
+  if(!text || text.includes("will appear") || text.includes("configured") || text.includes("Unable")){
+    toast("No code to copy"); return;
+  }
+  try{await navigator.clipboard.writeText(text);toast("Code copied");}
+  catch{toast("Copy unavailable");}
+});
+
+$("#qrGenerate").addEventListener("click", ()=>{
+  toast("Connect your QR endpoint first");
+});
+</script>
+</body>
+</html>
