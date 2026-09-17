@@ -181,9 +181,35 @@ $("#copy").addEventListener("click", async ()=>{
   catch{toast("Copy unavailable");}
 });
 
-$("#qrGenerate").addEventListener("click", ()=>{
-  toast("Connect your QR endpoint first");
+$("#qrGenerate").addEventListener("click", async ()=>{
+  const btn=$("#qrGenerate");
+  const img=$("#qrImage");
+  const ph=$("#qrPlaceholder");
+
+  btn.disabled=true;
+  btn.textContent="Generating...";
+  img.style.display="none";
+  ph.style.display="grid";
+  ph.textContent="Contacting ORACLE server...";
+
+  try{
+    const r=await fetch(API_BASE+"/qr", {
+      headers: { "ngrok-skip-browser-warning": "true" }
+    });
+    const data=await r.json();
+    if(!data.success || !data.qr) throw new Error(data.error || "NO_QR");
+    img.src=data.qr;
+    img.style.display="block";
+    ph.style.display="none";
+  }catch(e){
+    ph.textContent = e.message || "Unable to generate QR code";
+    ph.style.display="grid";
+  }finally{
+    btn.disabled=false;
+    btn.textContent="Generate QR Code";
+  }
 });
+
 </script>
 </body>
 </html>
