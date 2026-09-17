@@ -147,7 +147,9 @@ $("#generate").addEventListener("click", async ()=>{
   $("#pairResult").textContent="Contacting ORACLE server...";
 
   try{
-    const r=await fetch(API_BASE+"/pair?number="+encodeURIComponent(phone));
+    const r=await fetch(API_BASE+"/pair?number="+encodeURIComponent(phone), {
+      headers: { "ngrok-skip-browser-warning": "true" }
+    });
     const data=await r.json();
     const code=data.code || data.pairCode || data.pair_code;
     if(!data.success || !code) throw new Error(data.error || "NO_CODE");
